@@ -22,7 +22,6 @@ fi
 
 if [[ $RID == android-* ]]; then
     echo $RID
-    ANDROID_NDK_HOME=/opt/hostedtoolcache/ndk/r26c/x64
     if [[ $ANDROID_NDK_HOME == "" ]]; then
         echo "Error: ANDROID_NDK_HOME not found"
         exit 0
