@@ -55,6 +55,7 @@ jobs:
         # You may pin to the exact commit or the version.
         # uses: nttld/setup-ndk@6a7e9c5494a25c4842ca1011f710300132eacd94
         uses: nttld/setup-ndk@v1.4.2
+        id: setup-ndk
         with:
           # Exact version to use
           ndk-version: r26c
@@ -70,6 +71,8 @@ jobs:
       - name: Build Linux
         if: runner.os == 'Linux'
         run: ./dockerbuild.sh
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
       - name: Upload artifacts
         uses: actions/upload-artifact@v4.3.1
         with:
