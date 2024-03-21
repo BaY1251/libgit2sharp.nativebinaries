@@ -21,8 +21,8 @@ else
 fi
 
 if [[ $RID == android-* ]]; then
-    if [[ $ANDROID_NDK_ROOT == "" ]]; then
-        echo "NDK_PATH not found"
+    if [[ $ANDROID_NDK_HOME == "" ]]; then
+        echo "Error: NDK_PATH not found"
         exit 0
     fi
 
@@ -32,7 +32,7 @@ if [[ $RID == android-* ]]; then
         ABI=armeabi-v7a
     fi
 
-    CMAKE_ANDROID=" -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake \
+    CMAKE_ANDROID=" -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
                     -DANDROID_PLATFORM=android-24 \
                     -DANDROID_ABI=$ABI"
     echo $CMAKE_ANDROID
