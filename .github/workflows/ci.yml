@@ -77,7 +77,9 @@ jobs:
         if: matrix.name == 'linux-musl-arm' || matrix.name == 'linux-musl-arm64'
       - name: Build Linux
         if: runner.os == 'Linux'
-        run: ./dockerbuild.sh
+        run:
+          echo ${ANDROID_NDK_HOME}
+          ./dockerbuild.sh
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
       - name: Upload artifacts
