@@ -59,6 +59,12 @@ jobs:
         with:
           # Exact version to use
           ndk-version: r26c
+      - name: CMD
+        run:
+          echo $ANDROID_NDK_HOME
+          echo ${{ steps.setup-ndk.outputs.ndk-path }}
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
       - name: Build Windows
         if: runner.os == 'Windows'
         run: ./build.libgit2.ps1 ${{ matrix.param }}
