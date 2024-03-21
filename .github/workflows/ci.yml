@@ -77,9 +77,7 @@ jobs:
         if: matrix.name == 'linux-musl-arm' || matrix.name == 'linux-musl-arm64'
       - name: Build Linux
         if: runner.os == 'Linux'
-        run:
-          echo ${ANDROID_NDK_HOME}
-          ./dockerbuild.sh
+        run: ./dockerbuild.sh
       - name: Upload artifacts
         uses: actions/upload-artifact@v4.3.1
         with:
