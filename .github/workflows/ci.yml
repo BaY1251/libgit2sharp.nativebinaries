@@ -56,6 +56,7 @@ jobs:
         # uses: nttld/setup-ndk@6a7e9c5494a25c4842ca1011f710300132eacd94
         uses: nttld/setup-ndk@v1.4.2
         id: setup-ndk
+        if: matrix.name == 'android-arm' || matrix.name == 'android-arm64'
         with:
           # Exact version to use
           ndk-version: r26c
