@@ -60,10 +60,11 @@ jobs:
         with:
           # Exact version to use
           ndk-version: r26c
-      - name: CMD
+      - name: LINUX_CMD
+        if: runner.os == 'Linux'
         run: |
           echo "ANDROID_NDK_HOME=${{ steps.setup-ndk.outputs.ndk-path }}"  >> "$GITHUB_ENV"
-          ls -l $ANDROID_NDK_HOME
+          ls -l $ANDROID_NDK_HOME/build/cmake/
       - name: Build Windows
         if: runner.os == 'Windows'
         run: ./build.libgit2.ps1 ${{ matrix.param }}
