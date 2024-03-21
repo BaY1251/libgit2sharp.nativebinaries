@@ -19,7 +19,7 @@ fi
 
 docker buildx build -t $RID -f $dockerfile --build-arg ARCH=$arch .
 
-docker run -t -e RID=$RID ANDROID_NDK_HOME=$ANDROID_NDK_HOME --name=$RID $RID
+docker run -t -e RID=$RID -e ANDROID_NDK_HOME=$ANDROID_NDK_HOME --name=$RID $RID
 
 docker cp $RID:/nativebinaries/nuget.package/runtimes nuget.package
 
