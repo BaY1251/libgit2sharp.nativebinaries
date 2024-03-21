@@ -21,6 +21,7 @@ else
 fi
 
 if [[ $RID == android-* ]]; then
+    echo $ANDROID_NDK_HOME
     if [[ $ANDROID_NDK_HOME == "" ]]; then
         echo "Error: NDK_PATH not found"
         exit 0
