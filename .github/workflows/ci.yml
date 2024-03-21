@@ -13,7 +13,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       RID: ${{ matrix.name }}
-      ANDROID_NDK_HOME: ${{ strategy.steps.setup-ndk.outputs.ndk-path }}
     strategy:
       matrix:
         include:
