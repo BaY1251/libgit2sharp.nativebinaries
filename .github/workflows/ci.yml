@@ -65,6 +65,7 @@ jobs:
         run: |
           echo "ANDROID_NDK_HOME=${{ steps.setup-ndk.outputs.ndk-path }}"  >> "$GITHUB_ENV"
           ls -l $ANDROID_NDK_HOME/build/cmake/
+          cat $ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake
       - name: Build Windows
         if: runner.os == 'Windows'
         run: ./build.libgit2.ps1 ${{ matrix.param }}
