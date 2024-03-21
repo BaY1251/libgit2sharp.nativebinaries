@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       RID: ${{ matrix.name }}
-      ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+      ANDROID_NDK_HOME: ${{ strategy.steps.setup-ndk.outputs.ndk-path }}
     strategy:
       matrix:
         include:
@@ -63,8 +63,7 @@ jobs:
           ndk-version: r26c
       - name: CMD
         run:
-          echo ${ANDROID_NDK_HOME}
-          echo ${{ steps.setup-ndk.outputs.ndk-path }}
+          echo ANDROID_NDK_HOME=${{ steps.setup-ndk.outputs.ndk-path }} >> $GITHUB_ENV
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
       - name: Build Windows
