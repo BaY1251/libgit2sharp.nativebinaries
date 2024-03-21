@@ -39,6 +39,8 @@ jobs:
             name: linux-arm
           - os: ubuntu-20.04
             name: android-arm
+          - os: ubuntu-20.04
+            name: android-arm64
           - os: macos-11
             name: osx-x64
           - os: macos-11
