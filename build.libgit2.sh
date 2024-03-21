@@ -21,9 +21,10 @@ else
 fi
 
 if [[ $RID == android-* ]]; then
+    echo $RID
     echo $ANDROID_NDK_HOME
     if [[ $ANDROID_NDK_HOME == "" ]]; then
-        echo "Error: NDK_PATH not found"
+        echo "Error: ANDROID_NDK_HOME not found"
         exit 0
     fi
 
@@ -34,7 +35,7 @@ if [[ $RID == android-* ]]; then
     fi
 
     CMAKE_ANDROID=" -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
-                    -DANDROID_PLATFORM=android-24 \
+                    -DANDROID_PLATFORM=android-26 \
                     -DANDROID_ABI=$ABI"
     echo $CMAKE_ANDROID
 fi
