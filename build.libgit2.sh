@@ -20,6 +20,24 @@ else
     USEHTTPS="OpenSSL-Dynamic"
 fi
 
+if [[ $RID == android-* ]]; then
+    if [[ $NDK_PATH == "" ]]; then
+        echo "NDK_PATH not found"
+        exit 0
+    fi
+
+    if [[ $RID == "android-arm64" ]]; then
+        ABI=arm64-v8a
+    else 
+        ABI=armeabi-v7a
+    fi
+
+    CMAKE_ANDROID=" -DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake \
+                    -DANDROID_PLATFORM=android-24 \
+                    -DANDROID_ABI=$ABI"
+    echo $CMAKE_ANDROID
+fi
+
 rm -rf libgit2/build
 mkdir libgit2/build
 pushd libgit2/build
@@ -33,6 +51,7 @@ cmake -DCMAKE_BUILD_TYPE:STRING=Release \
       -DCMAKE_OSX_ARCHITECTURES=$OSXARCHITECTURE \
       -DUSE_HTTPS=$USEHTTPS \
       -DUSE_BUNDLED_ZLIB=ON \
+      $CMAKE_ANDROID \
       ..
 cmake --build .
 
