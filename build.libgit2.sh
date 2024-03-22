@@ -37,6 +37,7 @@ if [[ $RID == android-* ]]; then
     CMAKE_ANDROID=" -DCMAKE_SYSTEM_NAME=Android \
                     -DCMAKE_ANDROID_NDK=$ANDROID_NDK_HOME
                     -DANDROID_PLATFORM=android-26 \
+                    -DCMAKE_SYSTEM_VERSION=24 \
                     -DANDROID_ABI=$ABI"
     echo $CMAKE_ANDROID
 fi
