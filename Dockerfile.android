@@ -3,6 +3,14 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
+RUN wget https://cmake.org/files/v3.29/cmake-3.29.0-linux-x86_64.tar.gz -O  cmake.tar.gz \
+    && tar -zxvf cmake.tar.gz \
+    && rm -rf cmake.tar.gz \
+    && cd cmake \
+    && make
+    && sudo make install
+    && sudo update-alternatives --install /usr/bin/cmake cmake /usr/local/bin/cmake 1 --force
+
 # 设置NDK版本环境变量
 ENV ANDROID_NDK_VERSION r26c
 
