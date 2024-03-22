@@ -3,8 +3,23 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
-# 使用官方Android SDK镜像
-FROM androidsdk:latest
+ENV ANDROID_SDK_ROOT /usr/local/android-sdk \
+    ANDROID_HOME /usr/local/android-sdk \
+    ANDROID_SDK_TOOLS /usr/local/android-sdk/tools \
+    ANDROID_SDK_PLATFORM_TOOLS /usr/local/android-sdk/platform-tools
+ 
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -o android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip && \
+    unzip -q android-sdk.zip -d /usr/local/android-sdk && \
+    rm android-sdk.zip && \
+    apt-get clean && \
+    chmod +x /usr/local/android-sdk/tools/bin/sdkmanager && \
+    yes | /usr/local/android-sdk/tools/bin/sdkmanager --licenses && \
+    /usr/local/android-sdk/tools/bin/sdkmanager "platform-tools" "platforms;android-29"
+ 
+ENV PATH $PATH:$ANDROID_SDK_TOOLS:$ANDROID_SDK_PLATFORM_TOOLS
+ 
  
 # 安装NDK
 RUN sdkmanager "ndk-bundle"
