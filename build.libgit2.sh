@@ -34,10 +34,8 @@ if [[ $RID == android-* ]]; then
         ABI=armeabi-v7a
     fi
 
-    CMAKE_ANDROID=" -DCMAKE_SYSTEM_NAME=Android \
-                    -DCMAKE_ANDROID_NDK=$ANDROID_NDK_HOME
+    CMAKE_ANDROID=" -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
                     -DANDROID_PLATFORM=android-26 \
-                    -DCMAKE_SYSTEM_VERSION=26 \
                     -DANDROID_ABI=$ABI"
     echo $CMAKE_ANDROID
 fi
