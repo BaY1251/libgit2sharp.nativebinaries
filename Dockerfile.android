@@ -4,17 +4,8 @@ ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
 # 设置NDK版本环境变量
-ENV NDK_VERSION 26.2.11394342
- 
-# 下载并解压NDK
-RUN mkdir -p /opt/android/ndk \
-    && curl -sSLO "https://dl.google.com/android/repository/android-ndk_$NDK_VERSION-linux.zip" \
-    && unzip -q android-ndk_$NDK_VERSION-linux.zip -d /opt/android/ndk \
-    && rm android-ndk_$NDK_VERSION-linux.zip
+ENV ANDROID_NDK_VERSION 26.2.11394342
 
-# 设置环境变量，以便在脚本和其他命令中使用
-ENV ANDROID_NDK_VERSION r26c
- 
 # 下载并安装NDK
 RUN wget https://dl.google.com/android/repository/android-ndk_$ANDROID_NDK_VERSION-linux.zip -O ndk.zip \
     && unzip ndk.zip -d /opt/android/ndk \
