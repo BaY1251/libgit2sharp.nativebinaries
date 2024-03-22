@@ -3,6 +3,8 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
+RUN snap install cmake --classic
+
 # 安装必要的依赖
 RUN apt-get install -y libssl-dev
  
