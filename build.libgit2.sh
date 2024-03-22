@@ -34,7 +34,8 @@ if [[ $RID == android-* ]]; then
         ABI=armeabi-v7a
     fi
 
-    CMAKE_ANDROID=" -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
+    CMAKE_ANDROID=" -DCMAKE_SYSTEM_NAME=Android \
+                    -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
                     -DANDROID_PLATFORM=android-26 \
                     -DCMAKE_ANDROID_STL_TYPE=c++_static \
                     -DANDROID_ABI=$ABI"
