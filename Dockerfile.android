@@ -4,7 +4,7 @@ ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
 # 设置NDK版本环境变量
-ENV NDK_VERSION 21.3.6528147
+ENV NDK_VERSION 26.2.11394342
  
 # 下载并解压NDK
 RUN mkdir -p /opt/android/ndk \
