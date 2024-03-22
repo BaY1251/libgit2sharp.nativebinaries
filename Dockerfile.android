@@ -3,15 +3,15 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
-# 添加新的PPA（Personal Package Archive）以获取最新版本的CMake
-RUN add-apt-repository -y ppa:kitware/kitware
-RUN apt-get update
- 
-# 安装CMake
-RUN apt-get install -y cmake
- 
-# 验证CMake版本
-RUN cmake --version
+RUN wget https://cmake.org/files/v3.29/cmake-3.29.0-linux-x86_64.tar.gz -O  cmake.tar.gz \
+    && tar -zxvf cmake.tar.gz \
+    && rm -rf cmake.tar.gz \
+    && cd cmake-3.29.0-linux-x86_64 \
+    && chmod 777 ./configure \
+    && ./configure \
+    && make \
+    && sudo make install \
+    && sudo update-alternatives --install /usr/bin/cmake cmake /usr/local/bin/cmake 1 --force
 
 # 设置NDK版本环境变量
 ENV ANDROID_NDK_VERSION r26c
