@@ -7,7 +7,6 @@ RUN apt update && apt -y install pkg-config cmake
 RUN wget https://cmake.org/files/v3.26/cmake-3.26.3.tar.gz
 RUN tar -xvzf cmake-3.26.3.tar.gz
 RUN cd cmake-3.26.3
-RUN chmod 777 ./configure
 RUN ./configure
 RUN make
 RUN sudo make install
