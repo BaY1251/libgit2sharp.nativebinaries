@@ -3,8 +3,6 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
-RUN snap install cmake --classic
-
 # 安装必要的依赖
 RUN apt-get install -y libssl-dev
  
@@ -18,7 +16,7 @@ RUN tar -zxvf cmake-3.24.0.tar.gz
 RUN cd cmake-3.24.0/
  
 # 编译安装
-RUN ./bootstrap && make && sudo make install
+RUN ./configure && make && sudo make install
  
 # 检查cmake版本
 RUN cmake --version
