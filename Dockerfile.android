@@ -8,7 +8,8 @@ ENV ANDROID_SDK_ROOT /usr/local/android-sdk \
     ANDROID_SDK_TOOLS /usr/local/android-sdk/tools \
     ANDROID_SDK_PLATFORM_TOOLS /usr/local/android-sdk/platform-tools
  
-RUN apt-get update && \
+RUN mkdir -p /usr/local/android-sdk/tools/bin/sdkmanager && \
+    apt-get update && \
     apt-get install -y curl && \
     curl -o android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip && \
     unzip -q android-sdk.zip -d /usr/local/android-sdk && \
