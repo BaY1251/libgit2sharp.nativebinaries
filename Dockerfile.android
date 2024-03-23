@@ -3,21 +3,8 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
-CMD ["/bin/bash", "-c", "./kitware-archive.sh"]
-
-RUN apt-get update
-RUN apt-get install ca-certificates gpg wget
-
-RUN test -f /usr/share/doc/kitware-archive-keyring/copyright ||
-RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
-
-RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
-RUN apt-get update
-
-RUN test -f /usr/share/doc/kitware-archive-keyring/copyright ||
-RUN rm /usr/share/keyrings/kitware-archive-keyring.gpg
-
-RUN apt-get install kitware-archive-keyring
+COPY ./kitware-archive.sh ./kitware-archive.sh
+RUN sh ./kitware-archive.sh
 RUN apt-get install cmake
 
 
