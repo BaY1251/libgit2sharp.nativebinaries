@@ -34,7 +34,7 @@ if [[ $RID == android-* ]]; then
         ABI=armeabi-v7a
     fi
 
-    cat $ANDROID_NDK_HOME/source.properties | grepPkg.Revision
+    $ANDROID_NDK_HOME/ndk-build --version
     CMAKE_ANDROID=" -DCMAKE_SYSTEM_NAME=Android \
                     -DCMAKE_SYSTEM_VERSION=21 \
                     -DCMAKE_ANDROID_ARCH_ABI=$ABI \
