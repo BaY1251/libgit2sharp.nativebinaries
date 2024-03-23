@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-key adv --fetch-keys https://apt.kitware.com/keys/kitware-archive-latest.asc
  
 # 添加CMake的官方APT仓库
-echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
+RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
 sudo apt-get update
 
 # RUN apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb-release -cs) main"
