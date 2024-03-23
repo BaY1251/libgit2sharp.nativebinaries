@@ -3,6 +3,22 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
+RUN sudo apt-get update
+RUN sudo apt-get install ca-certificates gpg wget
+
+RUN test -f /usr/share/doc/kitware-archive-keyring/copyright ||
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
+
+RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
+RUN sudo apt-get update
+
+RUN test -f /usr/share/doc/kitware-archive-keyring/copyright ||
+RUN sudo rm /usr/share/keyrings/kitware-archive-keyring.gpg
+
+RUN sudo apt-get install kitware-archive-keyring
+RUN sudo apt-get install cmake
+
+
 # 安装依赖
 RUN apt-get update && apt-get install -y \
     software-properties-common \
