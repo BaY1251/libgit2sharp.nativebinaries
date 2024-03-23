@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-key adv --fetch-keys https://apt.kitware.com/keys/kitware-archive-latest.asc
  
 # 添加CMake的官方APT仓库
-RUN apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main"
+RUN apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb-release -cs) main"
  
 # 再次更新包列表并安装CMake
 RUN apt-get update && apt-get install -y cmake
