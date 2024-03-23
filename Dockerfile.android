@@ -3,6 +3,13 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
+# 安装依赖
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    lsb-release \
+    gnupg2 \
+ && rm -rf /var/lib/apt/lists/*
+
 # 添加CMake官方的GPG密钥
 RUN apt-key adv --fetch-keys https://apt.kitware.com/keys/kitware-archive-latest.asc
  
