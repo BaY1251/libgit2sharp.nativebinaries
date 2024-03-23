@@ -57,6 +57,10 @@ jobs:
       - name: Build macOS
         if: runner.os == 'macOS'
         run: ./build.libgit2.sh
+      - name: Build Android
+        if: runner.os == 'Linux' && (matrix.name == 'android-arm' || matrix.name == 'android-arm64' )
+        run: |
+          ./build.libgit2.sh
       - name: Setup QEMU
         run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
         if: matrix.name == 'linux-musl-arm' || matrix.name == 'linux-musl-arm64'
