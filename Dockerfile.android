@@ -3,6 +3,14 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
+# 添加CMake官方的GPG密钥
+RUN apt-key adv --fetch-keys https://apt.kitware.com/keys/kitware-archive-latest.asc
+ 
+# 添加CMake的官方APT仓库
+RUN apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main"
+ 
+# 再次更新包列表并安装CMake
+RUN apt-get update && apt-get install -y cmake
 
 RUN wget https://cmake.org/files/v3.26/cmake-3.26.3.tar.gz
 RUN tar -xvzf cmake-3.26.3.tar.gz
