@@ -3,8 +3,7 @@ ARG ARCH='amd64'
 ENV CROSS_TRIPLE=${ARCH}
 RUN apt update && apt -y install pkg-config cmake
 
-RUN kitware-archive.sh
-
+CMD ["/bin/bash", "-c", "./kitware-archive.sh"]
 
 RUN apt-get update
 RUN apt-get install ca-certificates gpg wget
