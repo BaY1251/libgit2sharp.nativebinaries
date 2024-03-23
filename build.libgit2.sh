@@ -23,6 +23,7 @@ fi
 if [[ $RID == android-* ]]; then
     echo $RID
     cmake --version
+    ndk-build --version
     if [[ $ANDROID_NDK_HOME == "" ]]; then
         echo "Error: ANDROID_NDK_HOME not found"
         exit 0
