@@ -23,7 +23,6 @@ fi
 if [[ $RID == android-* ]]; then
     echo $RID
     cmake --version
-    ndk-build --version
     if [[ $ANDROID_NDK_HOME == "" ]]; then
         echo "Error: ANDROID_NDK_HOME not found"
         exit 0
@@ -35,6 +34,7 @@ if [[ $RID == android-* ]]; then
         ABI=armeabi-v7a
     fi
 
+    cat $ANDROID_NDK_HOME/source.properties | grepPkg.Revision
     CMAKE_ANDROID=" -DCMAKE_SYSTEM_NAME=Android \
                     -DCMAKE_SYSTEM_VERSION=21 \
                     -DCMAKE_ANDROID_ARCH_ABI=$ABI \
