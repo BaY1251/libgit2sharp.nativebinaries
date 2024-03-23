@@ -7,7 +7,7 @@ RUN apt update && apt -y install pkg-config cmake
 RUN apt-get update && apt-get install -y \
     software-properties-common \
     lsb-release \
-    gnupg2 ca-certificates gpg wget \
+    gnupg2 ca-certificates gpg wget kitware-archive-keyring \
  && rm -rf /var/lib/apt/lists/*
 
 # 添加CMake官方的GPG密钥
@@ -15,7 +15,8 @@ RUN apt-key adv --fetch-keys https://apt.kitware.com/keys/kitware-archive-latest
  
 # 添加CMake的官方APT仓库
 RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
-sudo apt-get update
+
+RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
 
 # RUN apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb-release -cs) main"
  
