@@ -23,6 +23,7 @@ fi
 if [[ $RID == android-* ]]; then
     echo $RID
     cmake --version
+    ls /usr/local/lib/android/sdk/ndk/25.2.9519653/toolchains
     if [[ $ANDROID_NDK_HOME == "" ]]; then
         echo "Error: ANDROID_NDK_HOME not found"
         exit 0
