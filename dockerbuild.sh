@@ -11,9 +11,7 @@ else
     arch="amd64"
 fi
 
-if [[ $RID == android* ]]; then
-    dockerfile="Dockerfile.android"
-elif [[ $RID == linux-musl* ]]; then
+if [[ $RID == linux-musl* ]]; then
     dockerfile="Dockerfile.linux-musl"
 else
     dockerfile="Dockerfile.linux"
