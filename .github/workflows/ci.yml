@@ -16,6 +16,31 @@ jobs:
     strategy:
       matrix:
         include:
+          - os: windows-2019
+            name: win-x86
+            param: -x86
+          - os: windows-2019
+            name: win-x64
+            param: -x64
+          - os: windows-2019
+            name: win-arm64
+            param: -arm64
+          - os: ubuntu-20.04
+            name: linux-x64
+          - os: ubuntu-20.04
+            name: linux-musl-x64
+          - os: ubuntu-20.04
+            name: linux-arm64
+          - os: ubuntu-20.04
+            name: linux-musl-arm
+          - os: ubuntu-20.04
+            name: linux-musl-arm64
+          - os: ubuntu-20.04
+            name: linux-arm
+          - os: macos-11
+            name: osx-x64
+          - os: macos-11
+            name: osx-arm64
           - os: ubuntu-20.04
             name: android-arm
           - os: ubuntu-20.04
@@ -32,15 +57,11 @@ jobs:
       - name: Build macOS
         if: runner.os == 'macOS'
         run: ./build.libgit2.sh
-      - name: Build Android
-        if: runner.os == 'Linux' && (matrix.name == 'android-arm' || matrix.name == 'android-arm64')
-        run: |
-          ./build.libgit2.sh
       - name: Setup QEMU
         run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
         if: matrix.name == 'linux-musl-arm' || matrix.name == 'linux-musl-arm64'
       - name: Build Linux
-        if: runner.os == 'Linux' && matrix.name != 'android-arm' && matrix.name != 'android-arm64'
+        if: runner.os == 'Linux'
         run: ./dockerbuild.sh
       - name: Upload artifacts
         uses: actions/upload-artifact@v4.3.1
