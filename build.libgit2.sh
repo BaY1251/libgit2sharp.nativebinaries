@@ -17,12 +17,6 @@ if [[ $OS == "Darwin" ]]; then
         OSXARCHITECTURE="x86_64"
     fi
 elif [[ $RID == android-* ]]; then
-    USEHTTPS="OpenSSL"
-    echo $RID
-    cmake --version
-    find . -name 'CMakeLists.txt' -exec sed -i 's|C_STANDARD 90|C_STANDARD 99|' {} \;
-    ls /usr/local/lib/android/sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin
-    ls /usr/local/lib/android/sdk/ndk/25.2.9519653/toolchains
     if [[ $ANDROID_NDK_HOME == "" ]]; then
         echo "Error: ANDROID_NDK_HOME not found"
         exit 0
@@ -38,15 +32,9 @@ elif [[ $RID == android-* ]]; then
                     -DCMAKE_SYSTEM_VERSION=23 \
                     -DCMAKE_ANDROID_ARCH_ABI=$ABI \
                     -DCMAKE_ANDROID_NDK=$ANDROID_NDK_HOME \
-                    -DBUILD_CLI=OFF \
-         -DBUILD_FUZZERS=OFF \
-        -DBUILD_EXAMPLES=OFF \
-        -DBUILD_SHARED_LIBS=OFF \
-        -DENABLE_WERROR=OFF \
-        -DDEPRECATE_HARD=OFF \
-        -DUSE_SSH=ON \
-        -DUSE_ICONV=ON \
                     "
+    USEHTTPS="OpenSSL"
+    find . -name 'CMakeLists.txt' -exec sed -i 's|C_STANDARD 90|C_STANDARD 99|' {} \;
 else
     USEHTTPS="OpenSSL-Dynamic"
 fi
@@ -62,7 +50,7 @@ cmake -DCMAKE_BUILD_TYPE:STRING=Release \
       -DLIBGIT2_FILENAME=git2-$SHORTSHA \
       -DCMAKE_OSX_ARCHITECTURES=$OSXARCHITECTURE \
       -DUSE_HTTPS=$USEHTTPS \
-      -DUSE_BUNDLED_ZLIB=OFF \
+      -DUSE_BUNDLED_ZLIB=ON \
       $CMAKE_ANDROID \
       ..
 cmake --build .
