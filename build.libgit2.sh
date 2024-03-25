@@ -23,6 +23,7 @@ fi
 if [[ $RID == android-* ]]; then
     echo $RID
     cmake --version
+    find . -name 'CMakeLists.txt' -exec sed -i 's|C_STANDARD 90|C_STANDARD 99|' {} \;
     ls /usr/local/lib/android/sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin
     ls /usr/local/lib/android/sdk/ndk/25.2.9519653/toolchains
     if [[ $ANDROID_NDK_HOME == "" ]]; then
