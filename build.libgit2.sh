@@ -16,11 +16,8 @@ if [[ $OS == "Darwin" ]]; then
     elif [[ $RID == "osx-x64" ]]; then
         OSXARCHITECTURE="x86_64"
     fi
-else
-    USEHTTPS="OpenSSL-Dynamic"
-fi
-
-if [[ $RID == android-* ]]; then
+elif [[ $RID == android-* ]]; then
+    USEHTTPS="OpenSSL"
     echo $RID
     cmake --version
     find . -name 'CMakeLists.txt' -exec sed -i 's|C_STANDARD 90|C_STANDARD 99|' {} \;
@@ -41,15 +38,9 @@ if [[ $RID == android-* ]]; then
                     -DCMAKE_SYSTEM_VERSION=23 \
                     -DCMAKE_ANDROID_ARCH_ABI=$ABI \
                     -DCMAKE_ANDROID_NDK=$ANDROID_NDK_HOME \
--DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake
--DANDROID_ABI=$ABI
--DANDROID_NDK=$ANDROID_NDK_HOME
--DANDROID_PLATFORM=android-23
--DCMAKE_EXPORT_COMPILE_COMMANDS=ON
--DCMAKE_C_FLAGS='-std=gnu11'
--DCMAKE_C_EXTENSIONS='-std=gnu11'
                     "
-    echo $CMAKE_ANDROID
+else
+    USEHTTPS="OpenSSL-Dynamic"
 fi
 
 rm -rf libgit2/build
