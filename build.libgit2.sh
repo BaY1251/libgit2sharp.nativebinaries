@@ -44,6 +44,7 @@ if [[ $RID == android-* ]]; then
 -DANDROID_NDK=$ANDROID_NDK_HOME
 -DANDROID_PLATFORM=android-23
 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_C_FLAGS='-std=gnu89'
                     "
     echo $CMAKE_ANDROID
 fi
