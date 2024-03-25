@@ -33,14 +33,14 @@ jobs:
         if: runner.os == 'macOS'
         run: ./build.libgit2.sh
       - name: Build Android
-        if: runner.os == 'Linux' && (matrix.name == 'android-arm' || matrix.name == 'android-arm64' )
+        if: runner.os == 'Linux' && (matrix.name == 'android-arm' || matrix.name == 'android-arm64')
         run: |
           ./build.libgit2.sh
       - name: Setup QEMU
         run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
         if: matrix.name == 'linux-musl-arm' || matrix.name == 'linux-musl-arm64'
       - name: Build Linux
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && matrix.name != 'android-arm' && matrix.name != 'android-arm64'
         run: ./dockerbuild.sh
       - name: Upload artifacts
         uses: actions/upload-artifact@v4.3.1
