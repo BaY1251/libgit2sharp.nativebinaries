@@ -35,10 +35,14 @@ if [[ $RID == android-* ]]; then
     fi
 
     CMAKE_ANDROID=" -DCMAKE_SYSTEM_NAME=Android \
-                    -DCMAKE_SYSTEM_VERSION=24 \
+                    -DCMAKE_SYSTEM_VERSION=23 \
                     -DCMAKE_ANDROID_ARCH_ABI=$ABI \
                     -DCMAKE_ANDROID_NDK=$ANDROID_NDK_HOME \
-                    -DCMAKE_ANDROID_STL_TYPE=gnustl_static
+-DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake
+-DANDROID_ABI=$ABI
+-DANDROID_NDK=$ANDROID_NDK_HOME
+-DANDROID_PLATFORM=android-23
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
                     "
     echo $CMAKE_ANDROID
 fi
