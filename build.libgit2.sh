@@ -38,6 +38,14 @@ elif [[ $RID == android-* ]]; then
                     -DCMAKE_SYSTEM_VERSION=23 \
                     -DCMAKE_ANDROID_ARCH_ABI=$ABI \
                     -DCMAKE_ANDROID_NDK=$ANDROID_NDK_HOME \
+                    -DBUILD_CLI=OFF \
+         -DBUILD_FUZZERS=OFF \
+        -DBUILD_EXAMPLES=OFF \
+        -DBUILD_SHARED_LIBS=OFF \
+        -DENABLE_WERROR=OFF \
+        -DDEPRECATE_HARD=OFF \
+        -DUSE_SSH=ON \
+        -DUSE_ICONV=ON \
                     "
 else
     USEHTTPS="OpenSSL-Dynamic"
@@ -51,11 +59,10 @@ export _BINPATH=`pwd`
 
 cmake -DCMAKE_BUILD_TYPE:STRING=Release \
       -DBUILD_TESTS:BOOL=OFF \
-      -DUSE_SSH=OFF \
       -DLIBGIT2_FILENAME=git2-$SHORTSHA \
       -DCMAKE_OSX_ARCHITECTURES=$OSXARCHITECTURE \
       -DUSE_HTTPS=$USEHTTPS \
-      -DUSE_BUNDLED_ZLIB=ON \
+      -DUSE_BUNDLED_ZLIB=OFF \
       $CMAKE_ANDROID \
       ..
 cmake --build .
