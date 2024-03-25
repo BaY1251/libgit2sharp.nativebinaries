@@ -33,7 +33,7 @@ elif [[ $RID == android-* ]]; then
                     -DCMAKE_ANDROID_ARCH_ABI=$ABI \
                     -DCMAKE_ANDROID_NDK=$ANDROID_NDK_HOME \
                     "
-    USEHTTPS="OpenSSL"
+    USEHTTPS="OpenSSL-Dynamic"
     find . -name 'CMakeLists.txt' -exec sed -i 's|C_STANDARD 90|C_STANDARD 99|' {} \;
 else
     USEHTTPS="OpenSSL-Dynamic"
